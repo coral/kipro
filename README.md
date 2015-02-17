@@ -8,5 +8,5 @@
 
 Very nice
 just go
-*npm install kipro*
+**npm install kipro**
 be happy
