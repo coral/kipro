@@ -1,10 +1,10 @@
 # kipro
 
-You can currently:
-Set/Get settings
-Get playlists
-Get clips
-###Download media from KiPro
+*You can currently:
+*Set/Get settings
+*Get playlists
+*Get clips
+* *Download media from KiPro*
 
 Very nice
 just go
