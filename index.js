@@ -93,7 +93,7 @@ function downloader()
 	function pop(dl)
 	{
 		downloadInstances++;
-		console.log("Transfer of " + dl.host + "initiated.");
+		console.log("Transfer of " + dl.host + " initiated.");
 		request(dl.host)
 		.on('error', function(err) {
 			console.log(err)
