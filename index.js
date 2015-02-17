@@ -77,16 +77,18 @@ KiPro.prototype.getMedia = function (file, location, callb) {
 
 	});
 
-
 }
 
 function downloader()
 {
 
-	if(downloadQueue.length > 0 && downloadInstances < maxDownloadInstances)
+	if(downloadQueue.length > 0)
 	{
-		pop(downloadQueue.pop())
-	}
+		if(downloadInstances < maxDownloadInstances)
+		{
+			pop(downloadQueue.pop());
+		}
+	} 
 
 	function pop(dl)
 	{
