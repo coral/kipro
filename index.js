@@ -3,7 +3,7 @@
 var events = require("events");
 var _ = require("underscore");
 var request = require("request");
-var host = "set";
+var host = "0.0.0.0";
 
 
 function KiPro (newHost) {
