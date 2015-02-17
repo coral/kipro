@@ -13,6 +13,12 @@ kipro.getClips(function (response) {
 kipro.getMedia("RECORDING_1.mov", "test.mov", function(file, location) {
 	console.log(file, location)
 });
+kipro.getMedia("RECORDING_2.mov", "test2.mov", function(file, location) {
+	console.log(file, location)
+});
+kipro.getMedia("RECORDING_3.mov", "test3.mov", function(file, location) {
+	console.log(file, location)
+});
 /*
 var test = new Date('02/17/15 10:26:47');
 var newDate = "" + test.getFullYear()  + numPad0(test.getMonth()+1) + test.getDate();

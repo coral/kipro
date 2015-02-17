@@ -6,6 +6,10 @@ var request = require("request");
 var fs = require("fs");
 var host = "0.0.0.0";
 
+var downloadInstances = 0;
+var maxDownloadInstances = 1;
+var downloadQueue = [];
+
 
 function KiPro (newHost) {
 	host = newHost;
@@ -53,15 +57,13 @@ KiPro.prototype.getPlaylists = function (cb) {
 
 }
 
-KiPro.prototype.getMedia = function (file, location, cb) {
+KiPro.prototype.getMedia = function (file, location, callb) {
 
 	//Setup the transfer logic
 	function download()
 	{
-		console.log("Transfer of " + file + "initiated.");
-		request('http://'+host+'/media/' + file).pipe(fs.createWriteStream(location));
-		console.log("Transfer of " + file + "completed.");
-		cb(file, location);
+		downloadQueue.push({host: 'http://'+host+'/media/' + file, file: file, location: location, cb: callb});
+		downloader();
 	}
 
 	//Check if KiPro is in DATA-LAN mode
@@ -76,6 +78,38 @@ KiPro.prototype.getMedia = function (file, location, cb) {
 	});
 
 
+}
+
+function downloader()
+{
+
+	if(downloadQueue.length > 0 && downloadInstances < maxDownloadInstances)
+	{
+		pop(downloadQueue.pop())
+	}
+
+	function pop(dl)
+	{
+		downloadInstances++;
+
+		console.log("Transfer of " + dl.host + "initiated.");
+		request(dl.host)
+		.on('error', function(err) {
+	    	console.log(err)
+	    	downloadInstances--;
+	    	dl.cb(false);
+	    	downloader();
+	  	})
+	  	.on('end', function(end)
+	  	{
+	  		console.log("Transfer of " + dl.host + " completed.");
+	  		downloadInstances--;
+	  		dl.cb(true, dl.location, dl.file);
+	  		downloader();
+	  	})
+	  	.pipe(fs.createWriteStream(dl.location));
+  	}
+  	
 }
 
 function query(action, cb)
