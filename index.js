@@ -88,12 +88,11 @@ function downloader()
 		{
 			pop(downloadQueue.pop());
 		}
-	} 
+	}
 
 	function pop(dl)
 	{
 		downloadInstances++;
-
 		console.log("Transfer of " + dl.host + "initiated.");
 		request(dl.host)
 		.on('error', function(err) {
