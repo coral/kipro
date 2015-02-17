@@ -1,6 +1,6 @@
 {
   "name": "kipro",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "lib for communicating with the AJA KiPro REST API series",
   "main": "index.js",
   "scripts": {

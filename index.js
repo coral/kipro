@@ -19,8 +19,8 @@ KiPro.prototype.getParameter = function (parameter, cb) {
 	
 	query('config?action=get&paramid=' + parameter, function (error, response, body) {
 		  if (!error && response.statusCode == 200) {
-		  	var response = JSON.parse(body);
-		  	cb(response);
+			var response = JSON.parse(body);
+			cb(response);
 		}
 	});
 }
@@ -29,8 +29,8 @@ KiPro.prototype.setParameter = function (parameter, value, cb) {
 	
 	query('config?action=set&paramid=' + parameter + '&value=' + value, function (error, response, body) {
 		  if (!error && response.statusCode == 200) {
-		  	var response = JSON.parse(body);
-		  	cb(response);
+			var response = JSON.parse(body);
+			cb(response);
 		}
 	});
 }
@@ -39,8 +39,8 @@ KiPro.prototype.getClips = function (cb) {
 
 	query('clips?action=get_clips', function (error, response, body) {
 		  if (!error && response.statusCode == 200) {
-		  	var response = JSON.parse(body);
-		  	cb(response);
+			var response = JSON.parse(body);
+			cb(response);
 		}
 	});
 
@@ -50,8 +50,8 @@ KiPro.prototype.getPlaylists = function (cb) {
 
 	query('clips?action=get_playlists', function (error, response, body) {
 		  if (!error && response.statusCode == 200) {
-		  	var response = JSON.parse(body);
-		  	cb(response);
+			var response = JSON.parse(body);
+			cb(response);
 		}
 	});
 
@@ -95,21 +95,21 @@ function downloader()
 		console.log("Transfer of " + dl.host + "initiated.");
 		request(dl.host)
 		.on('error', function(err) {
-	    	console.log(err)
-	    	downloadInstances--;
-	    	dl.cb(false);
-	    	downloader();
-	  	})
-	  	.on('end', function(end)
-	  	{
-	  		console.log("Transfer of " + dl.host + " completed.");
-	  		downloadInstances--;
-	  		dl.cb(true, dl.location, dl.file);
-	  		downloader();
-	  	})
-	  	.pipe(fs.createWriteStream(dl.location));
-  	}
-  	
+			console.log(err)
+			downloadInstances--;
+			dl.cb(false);
+			downloader();
+		})
+		.on('end', function(end)
+		{
+			console.log("Transfer of " + dl.host + " completed.");
+			downloadInstances--;
+			dl.cb(true, dl.location, dl.file);
+			downloader();
+		})
+		.pipe(fs.createWriteStream(dl.location));
+	}
+	
 }
 
 function query(action, cb)
